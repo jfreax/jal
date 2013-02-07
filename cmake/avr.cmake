@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 SET(CMAKE_SYSTEM_NAME avr)
 
+FILE(GLOB WILDCARD_PORT /dev/ttyUSB*)
+SET(PROGR_PORT ${WILDCARD_PORT})
+
 
 IF(NOT MCU OR NOT PROG_ID OR NOT PROGR_PORT OR NOT PROG_PART)
         message(FATAL_ERROR  "Specify all required variables (MCU PROG_ID PROGR_PORT PROG_PART)")
@@ -62,7 +65,6 @@ add_custom_target(gdbinit
 add_custom_target(reset
         COMMAND echo 0 > ${PROGR_PORT}
         VERBATIM)
-
 
 
 find_program(AVRDUDE avrdude)
