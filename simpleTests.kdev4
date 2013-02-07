@@ -1,0 +1,4 @@
+[Project]
+Name=simpleTests
+Manager=KDevCMakeManager
+VersionControl=kdevgit
