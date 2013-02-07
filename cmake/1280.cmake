@@ -1,0 +1,9 @@
+SET(CMAKE_SYSTEM_NAME avr)
+SET(MCU atmega1280)
+SET(PROG_PART ${MCU})
+SET(PROG_ID arduino) # avrisp2
+SET(PROGR_PORT "/dev/ttyUSB1")
+set(FCPU "16000000")
+set(UPLOAD_SPEED "57600")
+
+INCLUDE(cmake/avr.cmake)
