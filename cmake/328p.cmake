@@ -1,8 +1,7 @@
 SET(CMAKE_SYSTEM_NAME avr)
 SET(MCU atmega328p)
 SET(PROG_PART m328p)
-SET(PROG_ID arduino) # avrisp2
-set(FCPU "16000000")
+set(FCPU "16000000L")
 set(UPLOAD_SPEED "57600")
 
 INCLUDE(cmake/avr.cmake)
