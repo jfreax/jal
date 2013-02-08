@@ -27,8 +27,7 @@ int main(void)
     uint16_t c;
     while(1) {
         c = uart_getc();
-        if ( c & UART_NO_DATA ) {
-        } else {
+        if ( c ^ UART_NO_DATA ) {
             /* check for Frame or Overrun error */
             if ( c & UART_FRAME_ERROR ) {
                 /* Framing Error detected, i.e no stop bit detected */
