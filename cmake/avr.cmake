@@ -78,7 +78,7 @@ ELSE(${AVRDUDE-NOTFOUND})
 
 add_custom_target(upload
         ${AVRDUDE}
-                -v -v -v -v
+                #-v -v -v -v
                 -c ${PROG_ID}
                 -p ${PROG_PART}
                 -P ${PROGR_PORT}
