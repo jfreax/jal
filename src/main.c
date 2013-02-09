@@ -1,28 +1,30 @@
-#include <stdio.h>
+#ifndef F_CPU
+  #define F_CPU 16000000L
+#endif
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
-#include <avr/iom1280.h> // Special for kdevelop
-
-#include "uart.h"
-
-#ifndef F_CPU
-#define F_CPU 16000000L
+/* Special for kdevelop */
+#ifdef IN_IDE_PARSER
+  //#include <avr/iom1280.h>
+  #include <avr/iom328p.h>
 #endif
 
-#define UART_BAUD_RATE 9600
+
+#include "uart.h"
+#define UART_BAUD_RATE 57600
 
 
-int main(void)
+int __attribute__((naked))
+main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
 
     // Enable interrupt
     sei();
     uart_puts("String stored in SRAM\n");
-
-    DDRB  |= (1<<PC7);
 
     uint16_t c;
     while(1) {
@@ -42,13 +44,5 @@ int main(void)
             /* send received character back */
             uart_putc( (unsigned char)c );
         }
-
-
-        //PORTB |= (1<<PC7);
-        //uart_puts("a");
-        //_delay_ms(1000);
-        //PORTB &= ~(1<<PC7);
-        //uart_puts("b");
-        //_delay_ms(1000);
     }
 }

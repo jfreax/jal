@@ -10,7 +10,7 @@ SET(PROG_ID arduino) # avrisp2
 include_directories(${CMAKE_SOURCE_DIR}/extern/)
 
 # Include avr makefile
-INCLUDE(cmake/1280.cmake)
+INCLUDE(cmake/328p.cmake)
 
 # Add source directory
 add_subdirectory(extern)
