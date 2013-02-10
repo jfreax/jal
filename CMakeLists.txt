@@ -19,6 +19,7 @@ add_subdirectory(extern)
 add_executable(simpletests
   src/main.c
   src/spi.c
+  src/spi_eeprom.c
 )
 
 TARGET_LINK_LIBRARIES(simpletests

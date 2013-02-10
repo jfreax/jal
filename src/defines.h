@@ -26,15 +26,6 @@
  */
 #define UART_BAUD_RATE 57600
 
-/**
- * SPI
- */
-#if defined(MCU_328P)
-#define SPI_PORT PORTB
-#define SPI_DDR  DDRB
-#define DD_MOSI  DDB3
-#define DD_SCK   DDB5
-#endif
 
 
 #endif
