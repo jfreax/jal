@@ -1,7 +1,7 @@
 #ifndef DEFINES_H
 #define DEFINES_H
 
-/*
+/**
  * General
  */
 #ifndef F_CPU
@@ -9,9 +9,8 @@
 #endif
 
 #define MCU_328P 1
-#define UART_BAUD_RATE 57600
 
-/*
+/**
  * KDevelop extras
  */
 #if defined(MCU_328P) && !defined (_AVR_IOM328P_H_)
@@ -22,7 +21,12 @@
 #include <avr/iom1280.h>
 #endif
 
-/*
+/**
+ * UART
+ */
+#define UART_BAUD_RATE 57600
+
+/**
  * SPI
  */
 #if defined(MCU_328P)
