@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
@@ -15,7 +16,15 @@ main(void)
 
     // Enable interrupt
     sei();
-    uart_puts("String stored in SRAM\n");
+    uart_puts("Data on adress 20\n");
+
+    // Read test data from eeprom with spi
+    SPI_MasterInit();
+    int16_t data = EEPROM_read(20);
+
+    char intToStrBuffer[5];
+    itoa( data, intToStrBuffer, 10);
+    uart_puts(intToStrBuffer);
 
 
     uint16_t c;

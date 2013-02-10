@@ -6,8 +6,10 @@
 #if defined(MCU_328P)
 #define SPI_PORT PORTB
 #define SPI_DDR  DDRB
-#define DD_MOSI  DDB3
-#define DD_SCK   DDB5
+#define SPI_MOSI DDB3
+#define SPI_MISO DDB4
+#define SPI_SCK  DDB5
+#define SPI_CS   DDB2
 #endif
 
 
@@ -20,7 +22,7 @@ void SPI_MasterInit(void);
  * Shift full array to target device without receiving any byte
  * @param 8-Bit data
  */
-void SPI_MasterTransmit(uint8_t cData);
+uint8_t SPI_MasterTransmit(uint8_t cData);
 
 
 /**
