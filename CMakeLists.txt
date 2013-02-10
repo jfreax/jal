@@ -18,6 +18,7 @@ add_subdirectory(extern)
 # Source files
 add_executable(simpletests
   src/main.c
+  src/spi.c
 )
 
 TARGET_LINK_LIBRARIES(simpletests

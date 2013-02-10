@@ -1,7 +1,20 @@
+#ifndef DEFINES_H
+#define DEFINES_H
+
+/*
+ * General
+ */
+#ifndef F_CPU
+#define F_CPU 16000000L
+#endif
+
+#define MCU_328P 1
+#define UART_BAUD_RATE 57600
+
 /*
  * KDevelop extras
  */
-#if defined(MCU_328p) && !defined (_AVR_IOM328P_H_)
+#if defined(MCU_328P) && !defined (_AVR_IOM328P_H_)
 #include <avr/iom328p.h>
 #endif
 
@@ -12,9 +25,12 @@
 /*
  * SPI
  */
-#if defined(MCU_328p)
+#if defined(MCU_328P)
 #define SPI_PORT PORTB
 #define SPI_DDR  DDRB
 #define DD_MOSI  DDB3
 #define DD_SCK   DDB5
+#endif
+
+
 #endif
