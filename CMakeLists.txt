@@ -17,7 +17,7 @@ include_directories(${CMAKE_SOURCE_DIR}/src/)
 
 # Include avr makefile
 set(CMAKE_SYSTEM_NAME avr)
-include(cmake/avr.cmake)
+include(avr.cmake)
 
 # Add source directory
 add_subdirectory(extern)
@@ -34,8 +34,8 @@ TARGET_LINK_LIBRARIES(simpletests
 )
 
 
-# Add documentation
-# add a target to generate API documentation with Doxygen
+# Doygen documentation
+# Add a target to generate API documentation with Doxygen
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     add_custom_target(doc
