@@ -20,16 +20,17 @@ int16_t EEPROM_read(uint8_t adress)
     /* Send adress */
     uint8_t datastart = SPI_MasterTransmit(adress);
 
-    /* Shift out "dummy bit" manually */
-    SPCR &= ~(1 << SPE);
-    SPI_PORT |= (1 << SPI_SCK);
-    SPI_PORT &= ~(1 << SPI_SCK);
-    SPCR |= (1 << SPE);
+    /* Unlike writing, reading is on the trailing clock edge */
+    SPCR |= (1 << CPHA);
 
     /* Get data */
-    //int16_t data = (SPI_MasterReceive() << 9) | (SPI_MasterReceive() << 1) | (SPI_MasterReceive() >> 7);
     int16_t data = (SPI_MasterReceive() << 8) | (SPI_MasterReceive());
+
+    /* set back to leading edge */
+    SPCR &= ~(1 << CPHA);
+
     EEPROM_DESELECT;
+
     return data;
 }
 
@@ -53,7 +54,7 @@ void EEPROM_write(uint8_t adress, int16_t data)
     EEPROM_DESELECT;
 
     /* Wait T_WP=15ms (see datasheet) */
-    _delay_ms(15 + 5);
+    _delay_ms(15);
 }
 
 void EEPROM_write_enable(void)
