@@ -5,7 +5,7 @@ void SPI_MasterInit(void)
 {
     /* Set MOSI, SCK and CS as output, all others input */
     SPI_DDR = (1 << SPI_MOSI) | (1 << SPI_SCK) | (1 << SPI_CS);
-    SPI_DDR &= ~(1<<SPI_MISO);
+    SPI_DDR &= ~(1 << SPI_MISO);
 
     SPCR = ((1 << SPE) |            // SPI Enable
             (0 << SPIE) |           // SPI Interupt Enable
@@ -15,7 +15,7 @@ void SPI_MasterInit(void)
             (0 << CPOL) |           // Clock Polarity SCK low(0) / SCK hi when idle(1)
             (0 << CPHA));           // Clock Phase; leading(0) / trailing edge(1) sampling
 
-    SPSR = (1 << SPI2X);            // Double Clock Rate
+    //SPSR = (1 << SPI2X);            // Double Clock Rate
 }
 
 
@@ -29,16 +29,19 @@ uint8_t SPI_MasterTransmit(uint8_t cData)
 
     /* Wait for transmission complete */
     while (!(SPSR & (1 << SPIF)));
-    
+
     /* Deactivate the CS pin */
     //SPI_PORT |= (1<<SPI_CS);
-    
+
     return SPDR;
 }
 
 
 uint8_t SPI_MasterReceive(void)
 {
+    /* Send Dummy transmission for reading the data */
+    SPDR = 0x00;
+
     /* Wait for reception complete */
     while (!(SPSR & (1 << SPIF)));
 

@@ -16,15 +16,27 @@ main(void)
 
     // Enable interrupt
     sei();
-    uart_puts("Data on adress 20\n");
+    uart_puts("Data on adress 10\n");
+
+
+    // EEPROM SPI test code
+    SPI_MasterInit();
+
+    // Write data
+    EEPROM_write_enable();
+    EEPROM_write(10, 71);
 
     // Read test data from eeprom with spi
-    SPI_MasterInit();
-    int16_t data = EEPROM_read(20);
+    int16_t data = EEPROM_read(10);
 
-    char intToStrBuffer[5];
-    itoa( data, intToStrBuffer, 10);
+    char intToStrBuffer[16];
+    itoa(data, intToStrBuffer, 2);
     uart_puts(intToStrBuffer);
+    uart_puts("_2\n");
+    itoa(data, intToStrBuffer, 10);
+    uart_puts(intToStrBuffer);
+    uart_puts("_10\n");
+
 
 
     uint16_t c;
