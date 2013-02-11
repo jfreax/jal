@@ -3,7 +3,7 @@
 
 
 #include "spi_eeprom.h"
-#include "spi.h"
+#include "interface/spi.h"
 
 #define EEPROM_SELECT SPI_PORT |= (1 << SPI_CS)
 #define EEPROM_DESELECT   SPI_PORT &= ~(1 << SPI_CS); _delay_us(1)

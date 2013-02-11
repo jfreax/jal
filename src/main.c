@@ -5,8 +5,8 @@
 
 #include "defines.h"
 #include "uart.h"
-#include "spi.h"
-#include "spi_eeprom.h"
+#include "interface/spi.h"
+#include "devices/eeprom/spi_eeprom.h"
 
 
 int __attribute__((naked))

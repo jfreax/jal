@@ -3,11 +3,17 @@ cmake_minimum_required(VERSION 2.8)
 # Project
 project(simpletests)
 
+# Version number
+set(VERSION_MAJOR 0)
+set(VERSION_MINOR 1)
+set(VERSION_PATCH 0)
+
 # Programmer specific
 SET(PROG_ID arduino) # avrisp2
 
 # Add header location
 include_directories(${CMAKE_SOURCE_DIR}/extern/)
+include_directories(${CMAKE_SOURCE_DIR}/src/)
 
 # Include avr makefile
 INCLUDE(cmake/328p.cmake)
@@ -18,15 +24,13 @@ add_subdirectory(extern)
 # Source files
 add_executable(simpletests
   src/main.c
-  src/spi.c
-  src/spi_eeprom.c
+  src/interface/spi.c
+  src/devices/eeprom/spi_eeprom.c
 )
 
 TARGET_LINK_LIBRARIES(simpletests
   uart
 )
-
-
 
 
 # Add documentation
