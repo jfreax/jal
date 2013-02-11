@@ -31,6 +31,7 @@
 #include "devices/eeprom/spi_eeprom.h"
 
 
+
 int __attribute__((naked)) main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
@@ -46,12 +47,15 @@ int __attribute__((naked)) main(void)
 
     // Write data
     EEPROM_write_enable();
-    EEPROM_write(10, 3);
+    //EEPROM_write(10, 3);
 
     // Read test data from eeprom with spi
     int16_t data = EEPROM_read(10);
-    printf("Base 10: %i", data);
-    printf("Base 02: %i2", data);
+    printf("Base 10: %i\n", data);
+
+    char intToStrBuffer[16];
+    itoa(data, intToStrBuffer, 2);
+    printf("Base 02: %s\n", intToStrBuffer);
 
 
     uint16_t c;
