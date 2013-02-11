@@ -37,7 +37,7 @@ int16_t EEPROM_read(uint8_t adress)
     SPI_MasterTransmit(startcode);
 
     /* Send adress */
-    uint8_t datastart = SPI_MasterTransmit(adress);
+    SPI_MasterTransmit(adress);
 
     /* Unlike writing, reading is on the trailing clock edge */
     SPCR |= (1 << CPHA);
