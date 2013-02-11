@@ -31,12 +31,16 @@
 /**
  * KDevelop extras
  */
+#ifdef IN_IDE_PARSER
+
 #if defined(MCU_328P) && !defined (_AVR_IOM328P_H_)
 #include <avr/iom328p.h>
 #endif
 
 #if defined (MCU_1280) && !defined (_AVR_IOM1280_H_)
 #include <avr/iom1280.h>
+#endif
+
 #endif
 
 /**
@@ -46,4 +50,4 @@
 
 
 
-#endif
+#endif // DEFINES_H

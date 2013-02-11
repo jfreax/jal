@@ -17,21 +17,24 @@
 */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 
 #include "defines.h"
-#include "uart.h"
+#include "printf.h"
+
+#include "io/uart.h"
 #include "io/spi.h"
+
 #include "devices/eeprom/spi_eeprom.h"
 
-/**
- * Test
- */
+
 int __attribute__((naked)) main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
+    init_printf();
 
     // Enable interrupt
     sei();
@@ -47,15 +50,8 @@ int __attribute__((naked)) main(void)
 
     // Read test data from eeprom with spi
     int16_t data = EEPROM_read(10);
-
-    char intToStrBuffer[16];
-    itoa(data, intToStrBuffer, 10);
-    uart_puts(intToStrBuffer);
-    uart_puts("_10\n");
-    itoa(data, intToStrBuffer, 2);
-    uart_puts(intToStrBuffer);
-    uart_puts("_2\n");
-
+    printf("Base 10: %i", data);
+    printf("Base 02: %i2", data);
 
 
     uint16_t c;

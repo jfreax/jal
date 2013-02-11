@@ -19,19 +19,17 @@ include_directories(${CMAKE_SOURCE_DIR}/src/)
 set(CMAKE_SYSTEM_NAME avr)
 include(avr.cmake)
 
-# Add source directory
-add_subdirectory(extern)
-
 # Source files
 add_executable(simpletests
   src/main.c
+  src/printf.c
+  
+  src/io/uart.c
   src/io/spi.c
+  
   src/devices/eeprom/spi_eeprom.c
 )
 
-TARGET_LINK_LIBRARIES(simpletests
-  uart
-)
 
 
 # Doygen documentation
