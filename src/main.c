@@ -23,7 +23,7 @@
 
 #include "defines.h"
 #include "uart.h"
-#include "interface/spi.h"
+#include "io/spi.h"
 #include "devices/eeprom/spi_eeprom.h"
 
 /**

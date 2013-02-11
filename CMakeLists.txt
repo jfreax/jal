@@ -25,7 +25,7 @@ add_subdirectory(extern)
 # Source files
 add_executable(simpletests
   src/main.c
-  src/interface/spi.c
+  src/io/spi.c
   src/devices/eeprom/spi_eeprom.c
 )
 
