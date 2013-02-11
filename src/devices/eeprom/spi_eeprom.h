@@ -81,7 +81,9 @@ void EEPROM_write_enable(void);
 
 
 /**
- * ...
+ * This disables all write operations.
+ * Executing this function after a write would protect you against data disturb due to spurious noise,
+ * glitches and so on.
  */
 void EEPROM_write_disable(void);
 

@@ -76,6 +76,7 @@ void EEPROM_write(uint8_t adress, int16_t data)
     _delay_ms(15);
 }
 
+
 void EEPROM_write_enable(void)
 {
     EEPROM_SELECT;
@@ -83,9 +84,24 @@ void EEPROM_write_enable(void)
     uint8_t startcode = (1 << 2);
     SPI_MasterTransmit(startcode);
 
-    /* Send adress */
+    /* Send instruction */
     SPI_MasterTransmit(3 << 6);
 
     EEPROM_DESELECT;
 }
+
+
+void EEPROM_write_disable(void)
+{
+    EEPROM_SELECT;
+    /* Send start bit and OP Code (00) */
+    uint8_t startcode = (1 << 2);
+    SPI_MasterTransmit(startcode);
+
+    /* Send instruction */
+    SPI_MasterTransmit(0x00);
+
+    EEPROM_DESELECT;
+}
+
 
