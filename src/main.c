@@ -26,9 +26,10 @@
 #include "interface/spi.h"
 #include "devices/eeprom/spi_eeprom.h"
 
-
-int __attribute__((naked))
-main(void)
+/**
+ * Test
+ */
+int __attribute__((naked)) main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
 

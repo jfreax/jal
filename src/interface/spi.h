@@ -19,6 +19,20 @@
 #ifndef SPI_H
 #define SPI_H
 
+/** 
+ *  @file 
+ *  @code #include <spi.h> @endcode
+ *  @ingroup spi
+ * 
+ *  @brief This is
+ *         and more
+ *         here
+ *
+ *  @note Based on 
+ *  @author Jens Dieskau jens.dieskau@gmail.com http://jdsoft.de
+ */
+ 
+
 #include "defines.h"
 
 #if defined(MCU_328P)
@@ -39,7 +53,8 @@ void SPI_MasterInit(void);
 
 /**
  * Shift full array to target device without receiving any byte
- * @param 8-Bit data
+ * @param 8-bit data
+ * @return 8-bit data from MISO
  */
 uint8_t SPI_MasterTransmit(uint8_t cData);
 
@@ -51,4 +66,4 @@ uint8_t SPI_MasterTransmit(uint8_t cData);
 uint8_t SPI_MasterReceive(void);
 
 
-#endif
+#endif // SPI_H
