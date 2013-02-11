@@ -6,6 +6,9 @@ Makefile
 cmake_install.cmake
 install_manifest.txt
 
+# Doxygen
+doc/html/
+
 # Object files
 *.o
 
