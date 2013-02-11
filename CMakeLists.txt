@@ -8,15 +8,16 @@ set(VERSION_MAJOR 0)
 set(VERSION_MINOR 1)
 set(VERSION_PATCH 0)
 
-# Programmer specific
-SET(PROG_ID arduino) # avrisp2
+# Settings
+include(settings.cmake)
 
 # Add header location
 include_directories(${CMAKE_SOURCE_DIR}/extern/)
 include_directories(${CMAKE_SOURCE_DIR}/src/)
 
 # Include avr makefile
-INCLUDE(cmake/328p.cmake)
+set(CMAKE_SYSTEM_NAME avr)
+include(cmake/avr.cmake)
 
 # Add source directory
 add_subdirectory(extern)
