@@ -39,8 +39,8 @@ TARGET_LINK_LIBRARIES(simpletests
 find_package(Doxygen)
 if(DOXYGEN_FOUND)
     add_custom_target(doc
-      ${DOXYGEN_EXECUTABLE} ${sfxaedeeui_SOURCE_DIR}/doc/Doxyfile
-      WORKING_DIRECTORY ${sfxaedeeui_SOURCE_DIR}
+      ${DOXYGEN_EXECUTABLE} ${CMAKE_SOURCE_DIR}/doc/Doxyfile
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
       COMMENT "Generating API documentation with Doxygen" VERBATIM
     )
 else(DOXYGEN_FOUND)
