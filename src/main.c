@@ -24,18 +24,18 @@ main(void)
 
     // Write data
     EEPROM_write_enable();
-    EEPROM_write(10, 71);
+    EEPROM_write(10, 3);
 
     // Read test data from eeprom with spi
     int16_t data = EEPROM_read(10);
 
     char intToStrBuffer[16];
-    itoa(data, intToStrBuffer, 2);
-    uart_puts(intToStrBuffer);
-    uart_puts("_2\n");
     itoa(data, intToStrBuffer, 10);
     uart_puts(intToStrBuffer);
     uart_puts("_10\n");
+    itoa(data, intToStrBuffer, 2);
+    uart_puts(intToStrBuffer);
+    uart_puts("_2\n");
 
 
 
