@@ -32,7 +32,7 @@
 
 
 
-int __attribute__((naked)) main(void)
+int __attribute__((OS_main, noreturn)) main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
     init_printf();
