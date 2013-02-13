@@ -19,6 +19,9 @@ include_directories(${CMAKE_SOURCE_DIR}/src/)
 set(CMAKE_SYSTEM_NAME avr)
 include(avr.cmake)
 
+#enable_language(ASM)
+
+
 # Source files
 add_executable(simpletests
   src/main.c
@@ -26,6 +29,7 @@ add_executable(simpletests
   
   src/io/uart.c
   src/io/spi.c
+  src/io/twi.c
   
   src/devices/eeprom/spi_eeprom.c
 )

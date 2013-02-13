@@ -18,8 +18,11 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <avr/wdt.h>
+
 #include <util/delay.h>
 
 #include "defines.h"
@@ -27,6 +30,10 @@
 
 #include "io/uart.h"
 #include "io/spi.h"
+
+#include <compat/twi.h>
+
+#include "io/twi.h"
 
 #include "devices/eeprom/spi_eeprom.h"
 
@@ -41,12 +48,12 @@ int __attribute__((OS_main, noreturn)) main(void)
     sei();
     uart_puts("Data on adress 10\n");
 
-
-    // EEPROM SPI test code
+    // EEPROM SPI test code //
+    //////////////////////////
     SPI_MasterInit();
 
     // Write data
-    EEPROM_write_enable();
+    //EEPROM_write_enable();
     //EEPROM_write(10, 3);
 
     // Read test data from eeprom with spi
@@ -57,6 +64,29 @@ int __attribute__((OS_main, noreturn)) main(void)
     itoa(data, intToStrBuffer, 2);
     printf("Base 02: %s\n", intToStrBuffer);
 
+    // I2C test code //
+    // DDRC |= (1 << 4);
+    //DDRC |= (1 << 5);
+
+    //cli ();
+    //_delay_ms(100);
+
+    uint8_t twi_ret; // = i2c_start(0x55+I2C_WRITE);
+    twi_ret = TWI_init(50000);
+    printf("TWI2 init: %i\n", twi_ret);
+
+//     TWI_start(0x55, TWI_READ);
+//     TWI_write(0x80);
+//     TWI_stop();
+//
+//     TWI_start(0x55, TWI_READ);
+//     TWI_write(0xa7);
+//     TWI_stop();
+
+
+
+    // UART test code //
+    ////////////////////
 
     uint16_t c;
     while (1) {
@@ -75,6 +105,12 @@ int __attribute__((OS_main, noreturn)) main(void)
             }
             /* send received character back */
             uart_putc((unsigned char)c);
+
+            if ((char)c == '0') {
+                cli(); //irq's off
+                wdt_enable(WDTO_15MS); //wd on,15ms
+                while (1); //loop
+            }
         }
     }
 }

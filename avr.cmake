@@ -5,6 +5,8 @@ SET(CMAKE_SYSTEM_NAME avr)
 FILE(GLOB WILDCARD_PORT /dev/ttyUSB*)
 SET(PROGR_PORT ${WILDCARD_PORT})
 
+#SET(PROGR_PORT /dev/ttyUSB0)
+SET(PROGR_PORT /dev/rfcomm0)
 #IF(NOT PROGR_PORT)
 #  SET(PROGR_PORT usb)
 ##ENDIF(NOT PROGR_PORT)
@@ -76,7 +78,9 @@ IF(${AVRDUDE-NOTFOUND})
         message(WARNING "'avrdude' program not found. 'upload' and 'info' targets will not be available!")
 ELSE(${AVRDUDE-NOTFOUND})
 
+        message(WARNING ${UPLOAD_SPEED})
 add_custom_target(upload
+        echo 0 > ${PROGR_PORT} &&
         ${AVRDUDE}
                 #-v -v -v -v
                 -c ${PROG_ID}
@@ -86,6 +90,7 @@ add_custom_target(upload
                 -b ${UPLOAD_SPEED}
                 -D
                 -U flash:w:${PROJECT_NAME}.hex
+                -V
         DEPENDS ${PROJECT_NAME}.hex ${PROJECT_NAME}.ee.hex
         VERBATIM)
 
