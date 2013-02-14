@@ -24,6 +24,9 @@
 #define TWI_MRX_DATA_ACK            0x50  // Data byte has been received and ACK tramsmitted
 #define TWI_MRX_DATA_NACK           0x58  // Data byte has been received and NACK tramsmitted
 
+// Configuration
+#define INTERNAL_I2C_PULLUPS
+
 uint8_t TWI_init(uint32_t bitrate);
 
 uint8_t TWI_start(uint8_t address, uint8_t type);

@@ -75,9 +75,9 @@ int __attribute__((OS_main, noreturn)) main(void)
     twi_ret = TWI_init(50000);
     printf("TWI2 init: %i\n", twi_ret);
 
-//     TWI_start(0x55, TWI_READ);
-//     TWI_write(0x80);
-//     TWI_stop();
+     TWI_start(0x55, TWI_READ);
+     TWI_write(0x80);
+     TWI_stop();
 //
 //     TWI_start(0x55, TWI_READ);
 //     TWI_write(0xa7);

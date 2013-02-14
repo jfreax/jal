@@ -12,6 +12,12 @@
  */
 uint8_t TWI_init(uint32_t bitrate)
 {
+#ifdef INTERNAL_I2C_PULLUPS
+    PORTC |= (1 << 4) | (1 << 5);
+#else
+    PORTC &= ~(1 << 4) & ~(1 << 5);
+#endif
+
     TWSR = 0;
     TWBR = ((F_CPU / bitrate) - 16) / 2;
     if (TWBR < 11)
@@ -24,24 +30,16 @@ uint8_t TWI_init(uint32_t bitrate)
 uint8_t TWI_start(uint8_t address, uint8_t type)
 {
     uint8_t twst;
-    
+
     // Send START condition
     TWCR = (1 << TWINT) | (1 << TWSTA) | (1 << TWEN);
-
-    printf("1 - %i\n", TWCR);
 
     // Wait until transmission completed
     while (!(TWCR & (1 << TWINT)));
 
-    printf("2\n");
-
-
     // Check value of TWI Status Register. Mask prescaler bits.
     twst = TWSR & 0xF8;
     if ((twst != TWI_START) && (twst != TWI_REP_START)) return 1;
-    
-        printf("3\n");
-
 
     // Send device address
     TWDR = (address << 1) + type;
@@ -49,9 +47,6 @@ uint8_t TWI_start(uint8_t address, uint8_t type)
 
     // Wait until transmission completed and ACK/NACK has been received
     while (!(TWCR & (1 << TWINT)));
-    
-        printf("4\n");
-
 
     // Check value of TWI Status Register. Mask prescaler bits.
     twst = TWSR & 0xF8;
