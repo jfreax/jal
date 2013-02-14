@@ -24,6 +24,10 @@
 #define TWI_MRX_DATA_ACK            0x50  // Data byte has been received and ACK tramsmitted
 #define TWI_MRX_DATA_NACK           0x58  // Data byte has been received and NACK tramsmitted
 
+// Pin configuration
+#define SDA  PC4
+#define SCL  PC5
+
 // Configuration
 #define INTERNAL_I2C_PULLUPS
 
@@ -33,5 +37,7 @@ uint8_t TWI_start(uint8_t address, uint8_t type);
 void TWI_stop(void);
 
 uint8_t TWI_write(uint8_t byte);
+uint8_t TWI_read(uint8_t ack);
+
 
 #endif // TWI_H
