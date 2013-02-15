@@ -99,7 +99,15 @@ add_custom_target(info
                 -c ${PROG_ID}
                 -p ${PROG_PART}
                 -P ${PROGR_PORT} -e
-                -U -U hfuse:r:high.txt:r -U lfuse:r:low.txt:r
+                -U hfuse:r:high.txt:r -U lfuse:r:low.txt:r
+        VERBATIM)
+
+add_custom_target(console
+        ${AVRDUDE}
+                -c ${PROG_ID}
+                -p ${PROG_PART}
+                -P ${PROGR_PORT}
+                -t
         VERBATIM)
 
 add_custom_command(
