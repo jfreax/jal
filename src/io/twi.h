@@ -1,6 +1,19 @@
 #ifndef TWI_H
 #define TWI_H
 
+/**
+ * @file
+ * @code #include <twi.h> @endcode
+ * @ingroup twi
+ *
+ * @brief Two-Wire Interface
+ *
+ * TODO
+ *
+ * @author Jens Dieskau jens.dieskau@gmail.com http://jdsoft.de
+ *
+ */
+
 #include "defines.h"
 #include <avr/io.h>
 
@@ -31,12 +44,57 @@
 // Configuration
 #define INTERNAL_I2C_PULLUPS
 
+
+/**
+ * @brief Initialize 2-wire interface and set bitrate
+ *
+ * If bitrate is too high, then return 1
+ *
+ * @param bitrate TWI bitrate (Hz)
+ * @return TRUE:    OK, TWI Master accessible
+ *         FALSE:    Bitrate too high
+ */
 uint8_t TWI_init(uint32_t bitrate);
 
+
+/**
+ * @brief Start the TWI Master Interface
+ *
+ * @param adress Device adress
+ * @param type Type of required Operation:
+ *      TWI_READ: Read data from the slave
+ *      TWI_WRITE: Write data to the slave
+ * @return TRUE:    OK, TWI Master accessible
+ *         FALSE:   Error in starting TWI Master
+ */
 uint8_t TWI_start(uint8_t address, uint8_t type);
+
+
+/**
+ * @brief Stop the TWI Master Interface
+ */
 void TWI_stop(void);
 
+
+/**
+ * @brief Write a byte to the slave device.
+ * 
+ * @param byte Byte to be send
+ * @return TRUE:    Byte sent
+ *         FALSE:   Error in transmission
+ */
 uint8_t TWI_write(uint8_t byte);
+
+
+/**
+ * @brief Read a byte from the slave.
+ *
+ * If parameter ack is set then is this the last byte to read.
+ * TWI_stop() gets called automaticall.y
+ *
+ * @param ack if set, then this is the last byte
+ * @return Readed byte
+ */
 uint8_t TWI_read(uint8_t ack);
 
 

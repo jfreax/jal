@@ -1,15 +1,8 @@
 #include "twi.h"
 #include <stdio.h>
 
-/**
- * @brief Initialize 2-wire interface and set bitrate
- *
- * If bitrate is too high, then return 1
- *
- * @param bitrate TWI bitrate (Hz)
- * @return 1 - Ok
- *         0 - Bitrate too high
- */
+
+
 uint8_t TWI_init(uint32_t bitrate)
 {
 #ifdef INTERNAL_I2C_PULLUPS
@@ -97,3 +90,5 @@ uint8_t TWI_read(uint8_t ack)
 
     return data;
 }
+
+
