@@ -24,3 +24,7 @@
 /*! @defgroup eeprom EEPROM
     @brief Documentation for EEPROM. 
 */
+
+/*! @defgroup twi TWI
+    @brief Documentation for TWI (I2C). 
+*/

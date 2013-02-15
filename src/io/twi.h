@@ -51,7 +51,7 @@
  * If bitrate is too high, then return 1
  *
  * @param bitrate TWI bitrate (Hz)
- * @return TRUE:    OK, TWI Master accessible
+ * @return TRUE:    OK, TWI Master accessible\n
  *         FALSE:    Bitrate too high
  */
 uint8_t TWI_init(uint32_t bitrate);
@@ -61,10 +61,10 @@ uint8_t TWI_init(uint32_t bitrate);
  * @brief Start the TWI Master Interface
  *
  * @param adress Device adress
- * @param type Type of required Operation:
- *      TWI_READ: Read data from the slave
- *      TWI_WRITE: Write data to the slave
- * @return TRUE:    OK, TWI Master accessible
+ * @param type Type of operation:\n
+ *             TWI_READ: Read data from the slave\n
+ *             TWI_WRITE: Write data to the slave
+ * @return TRUE:    OK, TWI Master accessible\n
  *         FALSE:   Error in starting TWI Master
  */
 uint8_t TWI_start(uint8_t address, uint8_t type);
