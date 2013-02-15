@@ -1,6 +1,6 @@
-#include "twi.h"
 #include <stdio.h>
 
+#include "twi.h"
 
 
 uint8_t TWI_init(uint32_t bitrate)
