@@ -32,6 +32,7 @@ add_executable(simpletests
   src/io/twi.c
   
   src/devices/eeprom/spi_eeprom.c
+  src/devices/oled/co-16_module_v1.0.c
 )
 
 

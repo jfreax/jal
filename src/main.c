@@ -36,6 +36,7 @@
 #include "io/twi.h"
 
 #include "devices/eeprom/spi_eeprom.h"
+#include "devices/oled/co-16_module_v1.0.h"
 
 
 
@@ -75,11 +76,19 @@ int __attribute__((OS_main, noreturn)) main(void)
     twi_ret = TWI_init(50000);
     printf("TWI2 init: %i\n", twi_ret);
 
-     TWI_start(0x1E, TWI_WRITE);
-     TWI_write(0x80);
-     TWI_stop();
-     
-     printf("Finish");
+    CO_16_init();
+    CO_16_clear_display();
+    CO_16_set_position(2, 3);
+
+    for (uint8_t i = 0; i < 200; i++) {
+        CO_16_SEND_BYTE(i);
+    }
+
+//      TWI_start(0x1E, TWI_WRITE);
+//      TWI_write(0x80);
+//      TWI_stop();
+
+    printf("Finish");
 //
 //     TWI_start(0x55, TWI_READ);
 //     TWI_write(0xa7);
