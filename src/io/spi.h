@@ -16,7 +16,8 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef SPI_H
+#include "defines.h"
+#if !defined(SPI_H) && defined(JAL_USE_SPI)
 #define SPI_H
 
 /** 
@@ -35,13 +36,22 @@
 
 #include "defines.h"
 
-#if defined(MCU_328P)
+#if defined(__AVR_ATmega328P__)
 #define SPI_PORT PORTB
 #define SPI_DDR  DDRB
 #define SPI_MOSI DDB3
 #define SPI_MISO DDB4
 #define SPI_SCK  DDB5
 #define SPI_CS   DDB2
+
+#else // general pins (may be wrong)
+#define SPI_PORT PORTB
+#define SPI_DDR  DDRB
+#define SPI_MOSI DDB3
+#define SPI_MISO DDB4
+#define SPI_SCK  DDB5
+#define SPI_CS   DDB2
+
 #endif
 
 

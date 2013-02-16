@@ -36,6 +36,9 @@ LICENSE:
     GNU General Public License for more details.
                         
 *************************************************************************/
+#include "defines.h"
+#if defined(JAL_USE_UART)
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/pgmspace.h>
@@ -661,3 +664,5 @@ void uart1_puts_p(const char *progmem_s )
 
 
 #endif
+
+#endif // JAL_USE_UART

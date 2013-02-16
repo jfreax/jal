@@ -16,6 +16,9 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "defines.h"
+#if defined(JAL_USE_SPI)
+
 #include <avr/io.h>
 #include "spi.h"
 
@@ -66,3 +69,5 @@ uint8_t SPI_MasterReceive(void)
     /* Return Data Register */
     return SPDR;
 }
+
+#endif // JAL_USE_SPI

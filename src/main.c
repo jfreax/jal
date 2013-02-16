@@ -16,9 +16,6 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <avr/wdt.h>
@@ -35,9 +32,8 @@
 
 #include "io/twi.h"
 
-#include "devices/eeprom/spi_eeprom.h"
+#include "devices/eeprom/93C66.h"
 #include "devices/oled/ssd1306.h"
-
 
 
 int __attribute__((OS_main, noreturn)) main(void)
@@ -73,12 +69,12 @@ int __attribute__((OS_main, noreturn)) main(void)
 
     // SSD1306 test code //
     ///////////////////////
-    SSD1306_init();
-    SSD1306_clear_display();
+//     SSD1306_init();
+//     SSD1306_clear_display();
     //SSD1306_set_position(2, 3);
     //SSD1306_send_string("Hallooooo!1234567890");
     
-    init_printf(&ssd1306_stdout);
+//     init_printf(&ssd1306_stdout);
 
     printf("Finish");
 

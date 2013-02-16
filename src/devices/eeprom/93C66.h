@@ -16,15 +16,16 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
-#ifndef SPI_EEPROM_H
-#define SPI_EEPROM_H
+#include "defines.h"
+#if !defined(EEPROM_93C66_H) && defined(JAL_USE_EEPROM_93C66)
+#define EEPROM_93C66_H
 
 /** 
  * @file 
- * @code #include <spi_eeprom.h> @endcode
+ * @code #include <93C66.h> @endcode
  * @ingroup eeprom
  * 
- * @brief SPI control of a 93C66 EEPROM Modules
+ * @brief SPI control of a 93C66 EEPROM Module.
  * 
  * These functions can be used to read, write and erase data from EEPROM through the built in SPI. 
  * 
@@ -98,4 +99,4 @@ void EEPROM_write_disable(void);
 
 /**@}*/
 
-#endif // SPI_EEPROM_H
+#endif // EEPROM_93C66_H

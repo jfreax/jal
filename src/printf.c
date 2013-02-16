@@ -1,3 +1,6 @@
+#include "defines.h"
+#if defined(JAL_USE_PRINTF)
+
 #include "printf.h"
 #include "devices/oled/ssd1306.h"
 
@@ -17,6 +20,7 @@ int uart_putchar_stream(char c, FILE* stream)
 }
 
 
+#if defined(JAL_USE_SSD1306)
 int ssd1306_putchar_stream(char c, FILE* stream)
 {
     // TODO if (c == '\n')
@@ -25,3 +29,6 @@ int ssd1306_putchar_stream(char c, FILE* stream)
   
     return 0;
 }
+#endif // JAL_USE_SSD1306
+
+#endif // JAL_USE_PRINTF

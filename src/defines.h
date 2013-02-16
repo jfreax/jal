@@ -26,12 +26,35 @@
 #define F_CPU 16000000L
 #endif
 
-#define MCU_328P 1
+/** 
+ * Enable features.
+ * Comment out unused features
+ */
+#define JAL_USE_UART
+#define JAL_USE_TWI
+#define JAL_USE_SPI
+#define JAL_USE_PRINTF
+
+/** 
+ * Enable hardware device driver.
+ * Comment out unused drivers.
+ */
+#define JAL_USE_EEPROM_93C66
+#define JAL_USE_SSD1306
+
+
+/**
+ * UART specific
+ */
+#define UART_BAUD_RATE 57600
+
 
 /**
  * KDevelop extras
  */
 #ifdef IN_IDE_PARSER
+
+#define MCU_328P
 
 #if defined(MCU_328P) && !defined (_AVR_IOM328P_H_)
 #include <avr/iom328p.h>
@@ -42,12 +65,6 @@
 #endif
 
 #endif
-
-/**
- * UART
- */
-#define UART_BAUD_RATE 57600
-
 
 
 #endif // DEFINES_H

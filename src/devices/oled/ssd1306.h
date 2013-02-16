@@ -1,5 +1,6 @@
-#ifndef SSD1306_MODULE_V1_0
-#define SSD1306_MODULE_V1_0
+#include "defines.h"
+#if !defined(SSD1306_H) && defined(JAL_USE_SSD1306)
+#define SSD1306_H
 
 /**
  * @file
@@ -44,4 +45,4 @@ void SSD1306_set_contrast(uint8_t contrast);
 void SSD1306_scrollright(uint8_t start, uint8_t stop);
 
 
-#endif // SSD1306_MODULE_V1_0
+#endif // SSD1306_H

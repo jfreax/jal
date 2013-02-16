@@ -1,4 +1,7 @@
-#include <stdio.h>
+#include "defines.h"
+#if defined(JAL_USE_SSD1306)
+
+#include <avr/io.h>
 #include <util/delay.h>
 
 #include "io/twi.h"
@@ -222,3 +225,6 @@ void SSD1306_scrollright(uint8_t start, uint8_t stop)
     SSD1306_SEND_COMMAND(0XFF);
     SSD1306_SEND_COMMAND(SSD1306_ACTIVATE_SCROLL);
 }
+
+
+#endif // JAL_USE_SSD1306

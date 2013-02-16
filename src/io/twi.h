@@ -1,4 +1,5 @@
-#ifndef TWI_H
+#include "defines.h"
+#if !defined(TWI_H) && defined(JAL_USE_TWI)
 #define TWI_H
 
 /**

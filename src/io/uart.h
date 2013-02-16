@@ -1,4 +1,5 @@
-#ifndef UART_H
+#include "defines.h"
+#if !defined(UART_H) && defined(JAL_USE_UART)
 #define UART_H
 /************************************************************************
 Title:    Interrupt UART library with receive/transmit circular buffers

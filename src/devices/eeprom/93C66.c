@@ -16,12 +16,13 @@
     Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
+#include "defines.h"
+#if defined(JAL_USE_EEPROM_93C66)
 
 #include <avr/io.h>
 #include <util/delay.h>
 
-
-#include "spi_eeprom.h"
+#include "93C66.h"
 #include "io/spi.h"
 
 #define EEPROM_SELECT		SPI_PORT |= (1 << SPI_CS)
@@ -105,3 +106,4 @@ void EEPROM_write_disable(void)
 }
 
 
+#endif // JAL_USE_EEPROM_93C66

@@ -31,7 +31,7 @@ add_executable(simpletests
   src/io/spi.c
   src/io/twi.c
   
-  src/devices/eeprom/spi_eeprom.c
+  src/devices/eeprom/93C66.c
   src/devices/oled/ssd1306.c
 )
 

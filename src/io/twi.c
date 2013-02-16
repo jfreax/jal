@@ -1,5 +1,7 @@
-#include <stdio.h>
+#include "defines.h"
+#if defined(JAL_USE_TWI)
 
+#include <avr/io.h>
 #include "twi.h"
 
 
@@ -91,4 +93,5 @@ uint8_t TWI_read(uint8_t ack)
     return data;
 }
 
+#endif // JAL_USE_TWI
 
