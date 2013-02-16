@@ -20,19 +20,19 @@
 #if !defined(SPI_H) && defined(JAL_USE_SPI)
 #define SPI_H
 
-/** 
- *  @file 
+/**
+ *  @file
  *  @code #include <spi.h> @endcode
  *  @ingroup spi
- * 
+ *
  *  @brief This is
  *         and more
  *         here
  *
- *  @note Based on 
+ *  @note Based on
  *  @author Jens Dieskau jens.dieskau@gmail.com http://jdsoft.de
  */
- 
+
 
 #include "defines.h"
 

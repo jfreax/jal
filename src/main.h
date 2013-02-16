@@ -18,13 +18,13 @@
 
 
 /*! @defgroup spi SPI
-    @brief Documentation for SPI. 
+    @brief Documentation for SPI.
 */
 
 /*! @defgroup eeprom EEPROM
-    @brief Documentation for EEPROM. 
+    @brief Documentation for EEPROM.
 */
 
 /*! @defgroup twi TWI
-    @brief Documentation for TWI (I2C). 
+    @brief Documentation for TWI (I2C).
 */

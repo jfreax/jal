@@ -25,8 +25,8 @@
 #include "93C66.h"
 #include "io/spi.h"
 
-#define EEPROM_SELECT		SPI_PORT |= (1 << SPI_CS)
-#define EEPROM_DESELECT		SPI_PORT &= ~(1 << SPI_CS); _delay_us(1)
+#define EEPROM_SELECT       SPI_PORT |= (1 << SPI_CS)
+#define EEPROM_DESELECT     SPI_PORT &= ~(1 << SPI_CS); _delay_us(1)
 
 
 int16_t EEPROM_read(uint8_t adress)

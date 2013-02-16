@@ -24,9 +24,9 @@ int uart_putchar_stream(char c, FILE* stream)
 int ssd1306_putchar_stream(char c, FILE* stream)
 {
     // TODO if (c == '\n')
-    
+
     SSD1306_send_char(c);
-  
+
     return 0;
 }
 #endif // JAL_USE_SSD1306

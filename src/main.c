@@ -73,7 +73,7 @@ int __attribute__((OS_main, noreturn)) main(void)
 //     SSD1306_clear_display();
     //SSD1306_set_position(2, 3);
     //SSD1306_send_string("Hallooooo!1234567890");
-    
+
 //     init_printf(&ssd1306_stdout);
 
     printf("Finish");
@@ -100,7 +100,7 @@ int __attribute__((OS_main, noreturn)) main(void)
             /* send received character back */
             uart_putc((unsigned char)c);
 
-	    // TODO real command for reboot
+            // TODO real command for reboot
             if ((char)c == '0') {
                 cli(); //irq's off
                 wdt_enable(WDTO_15MS); //wd on,15ms

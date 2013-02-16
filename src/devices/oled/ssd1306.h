@@ -8,7 +8,7 @@
  * @ingroup oled
  *
  * @brief Driver for CO-16 OLED Module Board V1.0
- * 
+ *
  * A breakout module for a 128X64 Monochrome OLED Display with a SSD1306 controller.
  * It only uses the TWI (I2C) interface.
  *

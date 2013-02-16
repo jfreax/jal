@@ -26,7 +26,7 @@
 #define F_CPU 16000000L
 #endif // F_CPU
 
-/** 
+/**
  * Enable features.
  * Comment out unused features
  */
@@ -37,7 +37,7 @@
 
 #define JAL_INCLUDE_FONT
 
-/** 
+/**
  * Enable hardware device driver.
  * Comment out unused drivers.
  */

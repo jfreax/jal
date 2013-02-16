@@ -79,7 +79,7 @@ void TWI_stop(void);
 
 /**
  * @brief Write a byte to the slave device.
- * 
+ *
  * @param byte Byte to be send
  * @return TRUE:    Byte sent
  *         FALSE:   Error in transmission
