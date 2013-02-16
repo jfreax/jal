@@ -5,9 +5,13 @@
 #include <avr/io.h>
 
 
-void init_printf(void);
-static int uart_putchar_stream(char c, FILE *stream);
+void init_printf(FILE* file);
 
-static FILE mystdout = FDEV_SETUP_STREAM(uart_putchar_stream, NULL, _FDEV_SETUP_WRITE);
+int uart_putchar_stream(char c, FILE *stream);
+int ssd1306_putchar_stream(char c, FILE *stream);
+
+
+static FILE uart_stdout = FDEV_SETUP_STREAM(uart_putchar_stream, NULL, _FDEV_SETUP_WRITE);
+static FILE ssd1306_stdout = FDEV_SETUP_STREAM(ssd1306_putchar_stream, NULL, _FDEV_SETUP_WRITE);
 
 #endif // PRINTF_H

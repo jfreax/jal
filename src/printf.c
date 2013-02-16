@@ -1,11 +1,12 @@
 #include "printf.h"
+#include "devices/oled/ssd1306.h"
 
-void init_printf(void)
+void init_printf(FILE* file)
 {
-    stdout = &mystdout;
+    stdout = file;
 }
 
-static int uart_putchar_stream(char c, FILE* stream)
+int uart_putchar_stream(char c, FILE* stream)
 {
     if (c == '\n') uart_putchar_stream('\r', stream);
 
@@ -15,3 +16,12 @@ static int uart_putchar_stream(char c, FILE* stream)
     return 0;
 }
 
+
+int ssd1306_putchar_stream(char c, FILE* stream)
+{
+    // TODO if (c == '\n')
+    
+    SSD1306_send_char(c);
+  
+    return 0;
+}

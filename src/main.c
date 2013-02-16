@@ -36,14 +36,14 @@
 #include "io/twi.h"
 
 #include "devices/eeprom/spi_eeprom.h"
-#include "devices/oled/co-16_module_v1.0.h"
+#include "devices/oled/ssd1306.h"
 
 
 
 int __attribute__((OS_main, noreturn)) main(void)
 {
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
-    init_printf();
+    init_printf(&uart_stdout);
 
     // Enable interrupt
     sei();
@@ -65,35 +65,22 @@ int __attribute__((OS_main, noreturn)) main(void)
     itoa(data, intToStrBuffer, 2);
     printf("Base 02: %s\n", intToStrBuffer);
 
-    // I2C test code //
-    // DDRC |= (1 << 4);
-    //DDRC |= (1 << 5);
-
-    //cli ();
-    //_delay_ms(100);
-
+    // TWI test code //
+    ///////////////////
     uint8_t twi_ret; // = i2c_start(0x55+I2C_WRITE);
-    twi_ret = TWI_init(50000);
+    twi_ret = TWI_init(100000);
     printf("TWI2 init: %i\n", twi_ret);
 
-    CO_16_init();
-    CO_16_clear_display();
-    CO_16_set_position(2, 3);
-
-    for (uint8_t i = 0; i < 200; i++) {
-        CO_16_SEND_BYTE(i);
-    }
-
-//      TWI_start(0x1E, TWI_WRITE);
-//      TWI_write(0x80);
-//      TWI_stop();
+    // SSD1306 test code //
+    ///////////////////////
+    SSD1306_init();
+    SSD1306_clear_display();
+    //SSD1306_set_position(2, 3);
+    //SSD1306_send_string("Hallooooo!1234567890");
+    
+    init_printf(&ssd1306_stdout);
 
     printf("Finish");
-//
-//     TWI_start(0x55, TWI_READ);
-//     TWI_write(0xa7);
-//     TWI_stop();
-
 
 
     // UART test code //
@@ -117,6 +104,7 @@ int __attribute__((OS_main, noreturn)) main(void)
             /* send received character back */
             uart_putc((unsigned char)c);
 
+	    // TODO real command for reboot
             if ((char)c == '0') {
                 cli(); //irq's off
                 wdt_enable(WDTO_15MS); //wd on,15ms

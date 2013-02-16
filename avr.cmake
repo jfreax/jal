@@ -82,6 +82,7 @@ ELSE(${AVRDUDE-NOTFOUND})
 add_custom_target(upload
         echo 0 > ${PROGR_PORT} &&
         ${AVRDUDE}
+                -V
                 #-v -v -v -v
                 -c ${PROG_ID}
                 -p ${PROG_PART}
@@ -90,7 +91,6 @@ add_custom_target(upload
                 -b ${UPLOAD_SPEED}
                 -D
                 -U flash:w:${PROJECT_NAME}.hex
-                -V
         DEPENDS ${PROJECT_NAME}.hex ${PROJECT_NAME}.ee.hex
         VERBATIM)
 
