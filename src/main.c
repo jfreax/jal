@@ -34,6 +34,7 @@
 
 #include "devices/eeprom/93C66.h"
 #include "devices/oled/ssd1306.h"
+#include "devices/accel_gyro/mpu6050.h"
 
 
 int __attribute__((OS_main, noreturn)) main(void)
@@ -42,6 +43,7 @@ int __attribute__((OS_main, noreturn)) main(void)
     init_printf(&uart_stdout);
 
     printf("Hello!\n");
+    printf("%i\n", SDA);
 
     // Enable interrupt
     sei();
@@ -71,6 +73,8 @@ int __attribute__((OS_main, noreturn)) main(void)
     uint8_t twi_ret; // = i2c_start(0x55+I2C_WRITE);
     twi_ret = TWI_init(100000);
     printf("TWI2 init: %i\n", twi_ret);
+    
+    printf("Who am i: %i\n", MPU6050_device_id());
 //
 //     // SSD1306 test code //
 //     ///////////////////////

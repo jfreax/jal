@@ -17,9 +17,37 @@
 */
 
 #include "defines.h"
-#if defined(JAL_USE_ACCEL_GYRO_MPU6050_H) 
+#if defined(JAL_USE_ACCEL_GYRO_MPU6050_H)
+
+#include "mpu6050.h"
+#include <io/twi.h>
+#include <stdio.h>
 
 
+uint8_t MPU6050_device_id(void)
+{
+//     printf("Start\n");
+//     TWI_start(MPU6050_DEFAULT_ADDRESS, TWI_WRITE);
+
+    printf("Write ");
+    printf("%i\n", TWI_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_WHO_AM_I, 0));
+
+//     printf("Start #2\n");
+//     TWI_start(MPU6050_DEFAULT_ADDRESS, TWI_READ);
+
+    printf("Read");
+    
+    uint8_t data;
+    printf("%i\n", TWI_read(MPU6050_DEFAULT_ADDRESS, &data,1));
+    return (data >> 1) & 0x3F; // 6 bit only! (0xxxxxx0)
+}
+
+
+void MPU6050_reset(void)
+{
+    //writeBit(devAddr, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_DEVICE_RESET_BIT, true);
+
+}
 
 
 

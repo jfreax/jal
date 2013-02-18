@@ -20,6 +20,8 @@
 #if !defined(MPU6050_H) && defined(JAL_USE_ACCEL_GYRO_MPU6050_H)
 #define MPU6050_H
 
+#include <avr/io.h>
+
 
 #define MPU6050_ADDRESS_AD0_LOW 0x68 // address pin low (GND), default for InvenSense evaluation board
 #define MPU6050_ADDRESS_AD0_HIGH 0x69 // address pin high (VCC)
@@ -376,6 +378,17 @@
 #define MPU6050_DMP_MEMORY_CHUNK_SIZE 16
 
 
+/**
+ * @brief Get Device ID. (aka WHO_AM_I)
+ * 
+ * This register is used to verify the identity of the device (0b110100, 0x34).
+ * 
+ * @return Device ID (6 bits only! should be 0x34 / 52)
+ * @see MPU6050_RA_WHO_AM_I
+ * @see MPU6050_WHO_AM_I_BIT
+ * @see MPU6050_WHO_AM_I_LENGTH
+ */
+uint8_t MPU6050_device_id(void);
 
 
 #endif // MPU6050_H
