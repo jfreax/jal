@@ -39,8 +39,22 @@
 #define TWI_MRX_DATA_NACK           0x58  // Data byte has been received and NACK tramsmitted
 
 // Pin configuration
+#if defined(__AVR_ATmega48__) || defined(__AVR_ATmega88__) || defined(__AVR_ATmega168__) || defined(__AVR_ATmega48P__) || defined(__AVR_ATmega88P__) || defined(__AVR_ATmega168P__) || defined(__AVR_ATmega328P__) \
+ || defined(__AVR_ATmega3250__) || defined(__AVR_ATmega3290__) ||defined(__AVR_ATmega6450__) || defined(__AVR_ATmega6490__)
+#define TWI_PORT PORTC
 #define SDA  PC4
 #define SCL  PC5
+
+#elif defined(__AVR_ATmega2560__) || defined(__AVR_ATmega2561__) || defined(__AVR_ATmega1280__)  || defined(__AVR_ATmega1281__) || defined(__AVR_ATmega640__)
+#define TWI_PORT PORTD
+#define SDA  PD1
+#define SCL  PD0
+
+#else // general pins (may be wrong)
+#define TWI_PORT PORTC
+#define SDA  PC4
+#define SCL  PC5
+#endif
 
 // Configuration
 #define INTERNAL_I2C_PULLUPS

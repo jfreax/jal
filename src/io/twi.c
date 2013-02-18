@@ -8,9 +8,9 @@
 uint8_t TWI_init(uint32_t bitrate)
 {
 #ifdef INTERNAL_I2C_PULLUPS
-    PORTC |= (1 << SDA) | (1 << SCL);
+    TWI_PORT |= (1 << SDA) | (1 << SCL);
 #else
-    PORTC &= ~(1 << SDA) & ~(1 << SCL);
+    TWI_PORT &= ~(1 << SDA) & ~(1 << SCL);
 #endif
 
     TWSR = 0;
