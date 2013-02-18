@@ -1244,7 +1244,16 @@ INCLUDE_FILE_PATTERNS  =
 # undefined via #undef or recursively expanded use the := operator 
 # instead of the = operator.
 
-PREDEFINED             = __attribute__(x)= 
+PREDEFINED             = __attribute__(x)= \
+                         JAL_REBOOT_WATCHDOG \
+                         JAL_USE_UART \
+                         JAL_USE_TWI \
+                         JAL_USE_SPI \
+                         JAL_USE_PRINTF \
+                         JAL_INCLUDE_FONT \
+                         JAL_USE_EEPROM_93C66 \
+                         JAL_USE_SSD1306 \
+                         JAL_USE_ACCEL_GYRO_MPU6050_H
 
 # If the MACRO_EXPANSION and EXPAND_ONLY_PREDEF tags are set to YES then 
 # this tag can be used to specify a list of macro names that should be expanded. 
