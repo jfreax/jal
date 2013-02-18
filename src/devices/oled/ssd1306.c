@@ -64,10 +64,8 @@ void SSD1306_init(void)
 
 void SSD1306_write_register(uint8_t address, uint8_t reg, uint8_t value)
 {
-    TWI_start(address, TWI_WRITE);
-    TWI_write(reg);
-    TWI_write(value);
-    TWI_stop();
+    TWI_write(address, reg, 0);
+    TWI_write(address, value, 1);
 }
 
 
