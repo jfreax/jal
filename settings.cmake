@@ -2,7 +2,7 @@
 SET(PROG_ID arduino) # or e.g. avrisp2
 
 # Microcontroller
-SET(MCU atmega328p) # or e.g. atmega1280
+SET(MCU atmega1280) # or e.g atmega328p
 SET(PROG_PART ${MCU})
 
 # CPU speed in HZ

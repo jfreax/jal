@@ -31,7 +31,7 @@
  *
  * SPI must be initialized manually. Transmit and receive data is archived by using the spi functions from @link spi here@endlink.
  *
- * @note Based on *FM93C66 4096-Bit Serial CMOS EEPROM (MICROWIRE (TM) Synchronous Bus)* Datasheet
+ * @note Based on FM93C66 4096-Bit Serial CMOS EEPROM (MICROWIRE (TM) Synchronous Bus)* Datasheet
  *
  * @author Jens Dieskau jens.dieskau@gmail.com http://jdsoft.de
  *

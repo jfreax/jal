@@ -41,42 +41,48 @@ int __attribute__((OS_main, noreturn)) main(void)
     uart_init(UART_BAUD_SELECT(UART_BAUD_RATE, F_CPU));
     init_printf(&uart_stdout);
 
+    printf("Hello!\n");
+
     // Enable interrupt
     sei();
-    uart_puts("Data on adress 10\n");
+
+//     uart_puts("Data on adress 10\n");
 
     // EEPROM SPI test code //
     //////////////////////////
-    SPI_MasterInit();
-
-    // Write data
-    //EEPROM_write_enable();
-    //EEPROM_write(10, 3);
-
-    // Read test data from eeprom with spi
-    int16_t data = EEPROM_read(10);
-    printf("Base 10: %i\n", data);
-
-    char intToStrBuffer[16];
-    itoa(data, intToStrBuffer, 2);
-    printf("Base 02: %s\n", intToStrBuffer);
-
+//     SPI_MasterInit();
+//
+//     uart_puts("int\n");
+//
+//     // Write data
+//     //EEPROM_write_enable();
+//     //EEPROM_write(10, 3);
+//
+//     // Read test data from eeprom with spi
+//     int16_t data = EEPROM_read(10);
+//     printf("Base 10: %i\n", data);
+//
+//     char intToStrBuffer[16];
+//     itoa(data, intToStrBuffer, 2);
+//     printf("Base 02: %s\n", intToStrBuffer);
+//
     // TWI test code //
     ///////////////////
     uint8_t twi_ret; // = i2c_start(0x55+I2C_WRITE);
     twi_ret = TWI_init(100000);
     printf("TWI2 init: %i\n", twi_ret);
-
-    // SSD1306 test code //
-    ///////////////////////
+//
+//     // SSD1306 test code //
+//     ///////////////////////
+//     SSD1306_SEND_COMMAND(0xae);
 //     SSD1306_init();
 //     SSD1306_clear_display();
-    //SSD1306_set_position(2, 3);
-    //SSD1306_send_string("Hallooooo!1234567890");
+//     SSD1306_set_position(2, 3);
+//     SSD1306_send_string("Hallooooo!1234567890");
 
 //     init_printf(&ssd1306_stdout);
 
-    printf("Finish");
+//     printf("Finish");
 
 
     // UART test code //
@@ -101,11 +107,14 @@ int __attribute__((OS_main, noreturn)) main(void)
             uart_putc((unsigned char)c);
 
             // TODO real command for reboot
+#if defined(JAL_REBOOT_WATCHDOG)
             if ((char)c == '0') {
                 cli(); //irq's off
                 wdt_enable(WDTO_15MS); //wd on,15ms
                 while (1); //loop
             }
+#endif
+
         }
     }
 }

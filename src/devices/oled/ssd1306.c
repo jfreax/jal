@@ -15,7 +15,7 @@ void SSD1306_init(void)
     SSD1306_SEND_COMMAND(0xae); // Display off
     SSD1306_SEND_COMMAND(0x2e); // Deactivate scrolling
     SSD1306_SEND_COMMAND(0xa4); // Set all pixels OFF
-    //SSD1306_SEND_COMMAND(0xa5); // Set all pixels ON
+//     SSD1306_SEND_COMMAND(0xa5); // Set all pixels ON
 
     SSD1306_SEND_COMMAND(0xd3); // Set display offset
     SSD1306_SEND_COMMAND(0x00); //   no offset
@@ -35,7 +35,7 @@ void SSD1306_init(void)
     SSD1306_SEND_COMMAND(0xf1);
 
     SSD1306_SEND_COMMAND(0x8d); // Set Charge Pump enable/disable
-    SSD1306_SEND_COMMAND(0x14); //   set 0x10 - disable; 0x14 enable
+    SSD1306_SEND_COMMAND(0x14); //   0x10 = disable; 0x14 = enable
 
     SSD1306_SEND_COMMAND(0xdb); // Set vcomh
     SSD1306_SEND_COMMAND(0x40);
@@ -49,7 +49,7 @@ void SSD1306_init(void)
     SSD1306_SEND_COMMAND(0xC8); // Scan from Left to Right (wires at top)
 
     SSD1306_SEND_COMMAND(0xa6); // Set White chars on black backround
-    //SSD1306_SEND_COMMAND(0xa7); // Set BLACK chars on WHITE backround
+//     SSD1306_SEND_COMMAND(0xa7); // Set BLACK chars on WHITE backround
 
     SSD1306_SEND_COMMAND(0xa8); // Set MUX ratio
     SSD1306_SEND_COMMAND(0x3f); // Set MUX ratio
@@ -131,3 +131,4 @@ void SSD1306_scrollright(uint8_t start, uint8_t stop)
 
 
 #endif // JAL_USE_SSD1306
+

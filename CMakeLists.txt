@@ -33,6 +33,7 @@ add_executable(simpletests
   
   src/devices/eeprom/93C66.c
   src/devices/oled/ssd1306.c
+  src/devices/accel_gyro/mpu6050.c
   
   src/data/font.c
 )

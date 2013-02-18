@@ -30,9 +30,10 @@
  * Enable features.
  * Comment out unused features
  */
+// #define JAL_REBOOT_WATCHDOG
 #define JAL_USE_UART
 #define JAL_USE_TWI
-#define JAL_USE_SPI
+// #define JAL_USE_SPI
 #define JAL_USE_PRINTF
 
 #define JAL_INCLUDE_FONT
@@ -41,8 +42,9 @@
  * Enable hardware device driver.
  * Comment out unused drivers.
  */
-#define JAL_USE_EEPROM_93C66
-#define JAL_USE_SSD1306
+// #define JAL_USE_EEPROM_93C66
+// #define JAL_USE_SSD1306
+#define JAL_USE_ACCEL_GYRO_MPU6050_H
 
 
 
@@ -59,7 +61,7 @@
  */
 #ifdef IN_IDE_PARSER
 
-#define MCU_328P
+#define MCU_1280
 
 #if defined(MCU_328P) && !defined (_AVR_IOM328P_H_)
 #include <avr/iom328p.h>
