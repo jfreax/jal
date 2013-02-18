@@ -66,39 +66,44 @@
  * If bitrate is too high, then return 1
  *
  * @param bitrate TWI bitrate (Hz)
- * @return TRUE:    OK, TWI Master accessible\n
- *         FALSE:    Bitrate too high
+ * @return 0:    No error
  */
 uint8_t TWI_init(uint32_t bitrate);
 
 
 /**
  * @brief Start the TWI Master Interface
+ * 
+ * Should not be called directly.
  *
  * @param adress Device adress
  * @param type Type of operation:\n
  *             TWI_READ: Read data from the slave\n
  *             TWI_WRITE: Write data to the slave
- * @return TRUE:    OK, TWI Master accessible\n
- *         FALSE:   Error in starting TWI Master
+ * @return 0:    No error
  */
 uint8_t TWI_start(uint8_t address, uint8_t type);
 
 
 /**
  * @brief Stop the TWI Master Interface
+ * 
+ * Should not be called directly.
+ * 
+ * @return 0: No error
  */
-void TWI_stop(void);
+uint8_t TWI_stop(void);
 
 
 /**
  * @brief Write a byte to the slave device.
  *
  * @param byte Byte to be send
- * @return TRUE:    Byte sent
- *         FALSE:   Error in transmission
+ * @param ack if set, then this is the last byte
+ * @return 0:    Byte sent
+ *         else: Error in transmission
  */
-uint8_t TWI_write(uint8_t byte);
+uint8_t TWI_write(uint8_t address, uint8_t byte, uint8_t ack);
 
 
 /**
@@ -107,10 +112,25 @@ uint8_t TWI_write(uint8_t byte);
  * If parameter ack is set then is this the last byte to read.
  * TWI_stop() gets called automaticall.y
  *
+ * @param data Readed byte
  * @param ack if set, then this is the last byte
- * @return Readed byte
+ * @return 0:    Byte sent
+ *         else: Error in transmission
  */
-uint8_t TWI_read(uint8_t ack);
+uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack);
+
+
+/**
+ * @brief Wait until data successful transmitted
+ * 
+ * Waits 255 times (in a while loop) until given up
+ * and rise an error.
+ * 
+ * Should not be called directly.
+ *
+ * @return 0: No error
+ */
+uint8_t waitForTransmission(void);
 
 
 #endif // TWI_H
