@@ -2,6 +2,10 @@
 #if defined(JAL_USE_TWI)
 
 #include <avr/io.h>
+#include <stdio.h>
+
+#include <util/delay.h>
+
 #include "twi.h"
 
 
@@ -125,6 +129,7 @@ uint8_t waitForTransmission(void)
 {
     uint8_t num = 255;
     while (!(TWCR & (1 << TWINT))) {
+        _delay_us(2);
         if (!(num--)) {
             return 1;
         }
