@@ -66,7 +66,7 @@
  * If bitrate is too high, then return 1
  *
  * @param bitrate TWI bitrate (Hz)
- * 
+ *
  * @return 0:    No error
  */
 uint8_t TWI_init(uint32_t bitrate);
@@ -74,14 +74,14 @@ uint8_t TWI_init(uint32_t bitrate);
 
 /**
  * @brief Start the TWI Master Interface
- * 
+ *
  * Should not be called directly.
  *
  * @param adress Device adress
  * @param type Type of operation:\n
  *             TWI_READ: Read data from the slave\n
  *             TWI_WRITE: Write data to the slave
- * 
+ *
  * @return 0:    No error
  */
 uint8_t TWI_start(uint8_t address, uint8_t type);
@@ -89,25 +89,12 @@ uint8_t TWI_start(uint8_t address, uint8_t type);
 
 /**
  * @brief Stop the TWI Master Interface
- * 
+ *
  * Should not be called directly.
- * 
+ *
  * @return 0: No error
  */
 uint8_t TWI_stop(void);
-
-
-/**
- * @brief Write a byte to the slave device.
- *
- * @param adress Device adress
- * @param data Byte to be send
- * @param ack if set, then this is the last byte
- * 
- * @return 0:    Byte sent
- *         else: Error in transmission
- */
-uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack);
 
 
 /**
@@ -119,7 +106,7 @@ uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack);
  * @param adress Device adress
  * @param data Readed byte
  * @param ack if set, then this is the last byte
- * 
+ *
  * @return 0:    Byte sent
  *         else: Error in transmission
  */
@@ -128,26 +115,84 @@ uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack);
 
 /**
  * @brief Read byte from slave from a certain register
- * 
- * Its shorthand for TWI_write(..., regAddr, ...) and then TWI_read(..., regAddr, ...)
- * 
- * @param adress Device adress 
- * @param regAddr Register adress
+ *
+ * Its shorthand for TWI_write(..., register_address, ...) and then TWI_read(..., register_address, ...)
+ *
+ * @param adress Device adress
+ * @param register_address Register adress
  * @param data Byte to be send
  * @param ack if set, then this is the last byte
- * 
+ *
  * @return 0:    Byte sent
  *         else: Error in transmission
  */
-uint8_t TWI_read_register(uint8_t address, uint8_t regAddr, uint8_t* data, uint8_t ack);
+uint8_t TWI_read_register(uint8_t address, uint8_t register_address, uint8_t* data, uint8_t ack);
+
+
+/**
+ * @brief Write a byte to the slave device.
+ *
+ * @param adress Device adress
+ * @param data Byte to be send
+ * @param ack if set, then this is the last byte
+ *
+ * @return 0:    Byte sent
+ *         else: Error in transmission
+ */
+uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack);
+
+
+/**
+ * @brief Write a byte into a certain register on slave device.
+ * 
+ * Shorthand for TWI_write(..., register_address, ...) and then TWI_write(..., data, ...)
+ *
+ * @param adress Device adress
+ * @param register_address Register adress
+ * @param data Byte to be send
+ * @param ack if set, then this is the last byte
+ *
+ * @return 0:    Byte sent
+ *         else: Error in transmission
+ */
+uint8_t TWI_write_register(uint8_t address, uint8_t register_address, uint8_t data, uint8_t ack);
+
+
+/**
+ * @brief Change one single bit in an 8-bit device register
+ *
+ * @param adress Device adress
+ * @param register_address Register adress
+ * @param bit_number Which bit to change (0-7)
+ * @param data Byte to be send
+ * @param ack if set, then this is the last byte
+ *
+ * @return 0: Bit set
+ */
+uint8_t TWI_change_bit(uint8_t address, uint8_t register_address, uint8_t bit_number, uint8_t data, uint8_t ack);
+
+
+/**
+ * @brief Change many bits all at once in an 8-bit device register
+ *
+ * @param adress Device adress
+ * @param register_address Register adress
+ * @param start_bit Start bit
+ * @param length How many bits to change (0-7)
+ * @param data Byte to be send
+ * @param ack if set, then this is the last byte
+ *
+ * @return 0: Bit set
+ */
+uint8_t TWI_change_bits(uint8_t address, uint8_t register_address, uint8_t start_bit, uint8_t length, uint8_t data, uint8_t ack);
 
 
 /**
  * @brief Wait until data successful transmitted
- * 
+ *
  * Waits 255 times (in a while loop) until given up
  * and rise an error.
- * 
+ *
  * Should not be called directly.
  *
  * @return 0: No error

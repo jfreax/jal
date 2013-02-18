@@ -70,6 +70,50 @@ uint8_t TWI_stop(void)
 }
 
 
+uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack)
+{
+    if (TWI_start(address, TWI_READ))
+        return 1;
+
+    TWCR = (1 << TWINT) | (1 << TWEN) | (ack ? (1 << TWEA) : 0);
+
+    // Wait until transmission completed
+    if (waitForTransmission())
+        return 2;
+
+    *data = TWDR;
+    if (!ack) {
+        TWI_stop();
+    }
+
+    return 0;
+}
+
+
+uint8_t TWI_read_register(uint8_t address, uint8_t register_address, uint8_t* data, uint8_t ack)
+{
+    // Say that we want to read old register from slave
+    TWI_write(address, register_address, 0);
+
+    // Read what slaves say to us
+    if (TWI_start(address, TWI_READ))
+        return 1;
+
+    TWCR = (1 << TWINT) | (1 << TWEN) | (ack ? (1 << TWEA) : 0);
+
+    // Wait until transmission completed
+    if (waitForTransmission())
+        return 2;
+
+    *data = TWDR;
+    if (!ack) {
+        TWI_stop();
+    }
+
+    return 0;
+}
+
+
 uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack)
 {
     if (TWI_start(address, TWI_WRITE))
@@ -95,59 +139,41 @@ uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack)
 }
 
 
-// bool TWI_write_bit(uint8_t address, uint8_t regAddr, uint8_t bitNum, uint8_t data)
-// {
-//     uint8_t oldData;
-//     TWI_read_register(address, regAddr, &oldData);
-//     b = (data != 0) ? (b | (1 << bitNum)) : (b & ~(1 << bitNum));
-//     //printf("i2c - writeBit - b: %X\n", b);
-//     return writeByte(devAddr, regAddr, b);
-// }
-
-
-uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack)
+uint8_t TWI_write_register(uint8_t address, uint8_t register_address, uint8_t data, uint8_t ack)
 {
-    if (TWI_start(address, TWI_READ))
+    if (TWI_write(address, register_address, 0))
         return 1;
 
-    TWCR = (1 << TWINT) | (1 << TWEN) | (ack ? (1 << TWEA) : 0);
-
-    // Wait until transmission completed
-    if (waitForTransmission())
-        return 2;
-
-    *data = TWDR;
-    if (!ack) {
-        TWI_stop();
-    }
-
-    return 0;
+    return TWI_write(address, data, ack);
 }
 
 
-uint8_t TWI_read_register(uint8_t address, uint8_t regAddr, uint8_t* data, uint8_t ack)
+uint8_t TWI_change_bit(uint8_t address, uint8_t register_address, uint8_t bit_number, uint8_t data, uint8_t ack)
 {
-    // Say that we want to read old register from slave
-    TWI_write(address, regAddr, 0);
-  
-    // Read what slaves say to us
-    if (TWI_start(address, TWI_READ))
+    uint8_t register_data;
+    if (TWI_read_register(address, register_address, &register_data, 0))
         return 1;
 
-    TWCR = (1 << TWINT) | (1 << TWEN) | (ack ? (1 << TWEA) : 0);
+    register_data = data ? (register_data | (1 << bit_number)) : (register_data & ~(1 << bit_number));
 
-    // Wait until transmission completed
-    if (waitForTransmission())
-        return 2;
-
-    *data = TWDR;
-    if (!ack) {
-        TWI_stop();
-    }
-
-    return 0;
+    return TWI_write_register(address, register_address, register_data, ack);
 }
 
+
+uint8_t TWI_change_bits(uint8_t address, uint8_t register_address, uint8_t start_bit, uint8_t length, uint8_t data, uint8_t ack)
+{
+    uint8_t register_data;
+    if (TWI_read_register(address, register_address, &register_data, 0))
+        return 1;
+
+    unsigned char mask = ((1 << length) - 1) << (start_bit - length + 1);
+    data <<= (start_bit - length + 1); // shift data into correct position
+    data &= mask;
+    register_data &= ~(mask);
+    register_data |= data;
+
+    return TWI_write_register(address, register_address, register_data, ack);
+}
 
 
 uint8_t waitForTransmission(void)
