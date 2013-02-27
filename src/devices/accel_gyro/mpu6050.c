@@ -26,30 +26,55 @@
 
 uint8_t MPU6050_device_id(void)
 {
-//     printf("Start\n");
-//     TWI_start(MPU6050_DEFAULT_ADDRESS, TWI_WRITE);
-
-    printf("Write ");
-    printf("%i\n", TWI_write(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_WHO_AM_I, 0));
-
-//     printf("Start #2\n");
-//     TWI_start(MPU6050_DEFAULT_ADDRESS, TWI_READ);
-
-    printf("Read");
-    
     uint8_t data;
-    printf("%i\n", TWI_read(MPU6050_DEFAULT_ADDRESS, &data,1));
+    TWI_read_register(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_WHO_AM_I, &data, 1);
+
     return (data >> 1) & 0x3F; // 6 bit only! (0xxxxxx0)
 }
 
 
-void MPU6050_reset(void)
+__attribute__((always_inline))
+uint8_t MPU6050_reset(void)
 {
-    //writeBit(devAddr, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_DEVICE_RESET_BIT, true);
+    return TWI_change_bit(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_DEVICE_RESET_BIT, 1, 1);
+}
 
+
+__attribute__((always_inline))
+uint8_t MPU6050_reset_sensors(void)
+{
+    return TWI_change_bit(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_USER_CTRL, MPU6050_USERCTRL_SIG_COND_RESET_BIT, 1, 1);
+}
+
+
+void MPU6050_set_wakeCycle(uint8_t enabled)
+{
+    TWI_change_bit(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_CYCLE_BIT, enabled, 1);
+}
+
+
+void MPU6050_set_sleep(uint8_t enabled)
+{
+    TWI_change_bit(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_SLEEP_BIT, enabled, 1);
+}
+
+
+void MPU6050_set_tempsensor_enabled(uint8_t enabled)
+{
+    // 1 is actually disabled here
+    TWI_change_bit(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_TEMP_DIS_BIT, !enabled, 1);
+}
+
+
+uint16_t MPU6050_temperature(void)
+{
+    uint8_t buffer[2];
+    TWI_read_registers(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_TEMP_OUT_H, 2, buffer, 1);
+
+    return (((uint16_t)buffer[0]) << 8) | buffer[1];
 }
 
 
 
-
 #endif // JAL_USE_ACCEL_GYRO_MPU6050_H
+

@@ -107,8 +107,7 @@ uint8_t TWI_stop(void);
  * @param data Readed byte
  * @param ack if set, then this is the last byte
  *
- * @return 0:    Byte sent
- *         else: Error in transmission
+ * @return 0:    No error
  */
 uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack);
 
@@ -123,10 +122,23 @@ uint8_t TWI_read(uint8_t address, uint8_t* data, uint8_t ack);
  * @param data Byte to be send
  * @param ack if set, then this is the last byte
  *
- * @return 0:    Byte sent
- *         else: Error in transmission
+ * @return 0:    No error
  */
 uint8_t TWI_read_register(uint8_t address, uint8_t register_address, uint8_t* data, uint8_t ack);
+
+
+/**
+ * @brief Read multiple byte from slave from a certain register
+ *
+ * @param adress Device adress
+ * @param register_address First register adress
+ * @param length Number of bytes to read
+ * @param data Byte to be send
+ * @param ack if set, then this is the last byte
+ *
+ * @return 0:    No error
+ */
+uint8_t TWI_read_registers(uint8_t address, uint8_t register_address, uint8_t length, uint8_t* data, uint8_t ack);
 
 
 /**
@@ -144,7 +156,7 @@ uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack);
 
 /**
  * @brief Write a byte into a certain register on slave device.
- * 
+ *
  * Shorthand for TWI_write(..., register_address, ...) and then TWI_write(..., data, ...)
  *
  * @param adress Device adress

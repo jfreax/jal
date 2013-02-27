@@ -20,8 +20,20 @@
 #if !defined(MPU6050_H) && defined(JAL_USE_ACCEL_GYRO_MPU6050_H)
 #define MPU6050_H
 
-#include <avr/io.h>
+/**
+ * @file
+ * @code #include <mpu6050.h> @endcode
+ * @ingroup gyro
+ * @ingroup accelerometer
+ *
+ * @brief Driver for MPU6050
+ *
+ * @author Jens Dieskau jens.dieskau@gmail.com http://jdsoft.de
+ *
+ */
 
+
+#include <avr/io.h>
 
 #define MPU6050_ADDRESS_AD0_LOW 0x68 // address pin low (GND), default for InvenSense evaluation board
 #define MPU6050_ADDRESS_AD0_HIGH 0x69 // address pin high (VCC)
@@ -390,5 +402,30 @@
  */
 uint8_t MPU6050_device_id(void);
 
+
+/** 
+ * @brief Full device reset.
+ * 
+ * A small delay of ~50ms may be desirable after triggering a reset.
+ * 
+ * @see MPU6050_RA_PWR_MGMT_1
+ * @see MPU6050_PWR1_DEVICE_RESET_BIT
+ */
+__attribute__((always_inline)) uint8_t MPU6050_reset(void);
+
+
+/** @brief Reset all sensor registers and signal paths.
+ *
+ * @see MPU6050_RA_USER_CTRL
+ * @see MPU6050_USERCTRL_SIG_COND_RESET_BIT
+ */
+__attribute__((always_inline)) uint8_t MPU6050_reset_sensors(void);
+
+
+void MPU6050_set_wakeCycle(uint8_t enabled);
+void MPU6050_set_sleep(uint8_t enabled);
+
+void MPU6050_set_tempsensor_enabled(uint8_t enabled);
+uint16_t MPU6050_temperature(void);
 
 #endif // MPU6050_H

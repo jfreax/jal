@@ -48,6 +48,12 @@ int __attribute__((OS_main, noreturn)) main(void)
     // Enable interrupt
     sei();
 
+    DDRB |= (1 << PORTB5); // Port OC1A mit angeschlossener LED als Ausgang
+    TCCR1A = (1 << WGM10) | (1 << COM1A1); // PWM, phase correct, 8 bit.
+    TCCR1B = (1 << CS11) | (1 << CS10); // Prescaler 64 = Enable counter
+    OCR1A = 180;
+
+
 //     uart_puts("Data on adress 10\n");
 
     // EEPROM SPI test code //
@@ -72,9 +78,20 @@ int __attribute__((OS_main, noreturn)) main(void)
     ///////////////////
     uint8_t twi_ret; // = i2c_start(0x55+I2C_WRITE);
     twi_ret = TWI_init(100000);
-    printf("TWI2 init: %i\n", twi_ret);
-    
+    printf("TWI Init: %i\n", twi_ret);
+
     printf("Who am i: %i\n", MPU6050_device_id());
+
+    MPU6050_reset();
+    _delay_ms(50);
+    MPU6050_reset_sensors();
+    _delay_ms(50);
+
+    MPU6050_set_wakeCycle(0);
+    MPU6050_set_sleep(0);
+    MPU6050_set_tempsensor_enabled(1);
+
+    printf("Temp: %i\n", MPU6050_temperature());
 //
 //     // SSD1306 test code //
 //     ///////////////////////

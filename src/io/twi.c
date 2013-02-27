@@ -114,6 +114,20 @@ uint8_t TWI_read_register(uint8_t address, uint8_t register_address, uint8_t* da
 }
 
 
+uint8_t TWI_read_registers(uint8_t address, uint8_t register_address, uint8_t length, uint8_t* data, uint8_t ack)
+{
+    for (uint8_t i = 0; i < length; i++) {
+        if (TWI_read_register(address, register_address + i, &data[i], 0))
+            return 1;
+    }
+    if( ack )
+      TWI_stop();
+
+    return 0;
+}
+
+
+
 uint8_t TWI_write(uint8_t address, uint8_t data, uint8_t ack)
 {
     if (TWI_start(address, TWI_WRITE))

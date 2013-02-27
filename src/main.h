@@ -21,10 +21,18 @@
     @brief Documentation for SPI.
 */
 
-/*! @defgroup eeprom EEPROM
-    @brief Documentation for EEPROM.
-*/
-
 /*! @defgroup twi TWI
     @brief Documentation for TWI (I2C).
+*/
+
+/*! @defgroup eeprom EEPROM
+    @brief Documentation for EEPROM driver.
+*/
+
+/*! @defgroup accelerometer Accelerometer
+    @brief Documentation for accelerometer devices.
+*/
+
+/*! @defgroup gyro Gyroscope
+    @brief Documentation for gyro devices.
 */
